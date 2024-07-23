@@ -24,9 +24,11 @@ public class QuizService {
 
     public ResponseEntity<String> createQuizs(String category, int noq, String qtitle) {
 
+        List<Question> questions = qrepo.getQuizQns(category,noq);
+
         Quiz quiz = new Quiz();
         quiz.setQtitle(qtitle);
-        quiz.setQuestions(qrepo.getQuizQns(category,noq));
+        quiz.setQuestions(questions);
         qzRepo.save(quiz);
 
         return new ResponseEntity<>("Successfuly saved!!", HttpStatus.CREATED);
